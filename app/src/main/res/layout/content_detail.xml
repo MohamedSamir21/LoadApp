@@ -25,11 +25,12 @@
         android:id="@+id/tvDownloadedFileName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="87dp"
+        android:layout_marginStart="92dp"
         android:layout_marginTop="72dp"
         android:textSize="@dimen/default_text_size"
         app:layout_constraintStart_toEndOf="@+id/tvFileName"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBaseline_toBaselineOf="@id/tvFileName"/>
 
     <TextView
         android:id="@+id/tvStatus"
@@ -47,11 +48,12 @@
         android:id="@+id/tvStatusValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="84dp"
-        android:layout_marginTop="232dp"
+        android:layout_marginStart="108dp"
+        android:layout_marginTop="136dp"
         android:textSize="@dimen/default_text_size"
         app:layout_constraintStart_toEndOf="@+id/tvStatus"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/tvDownloadedFileName"
+        app:layout_constraintBaseline_toBaselineOf="@id/tvStatus"/>
 
     <Button
         android:id="@+id/okButton"

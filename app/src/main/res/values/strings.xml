@@ -19,5 +19,6 @@
     <string name="file_name">File Name: </string>
     <string name="status">Status:</string>
 
-    <string name="details_notification_channel_id" translatable="false">details_channel</string>
+    <string name="details_notification_channel_id">details_channel</string>
+    <string name="download_notification_channel_description">Download details</string>
 </resources>

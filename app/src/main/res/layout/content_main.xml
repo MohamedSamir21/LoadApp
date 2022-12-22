@@ -9,6 +9,20 @@
     tools:context=".MainActivity"
     tools:showIn="@layout/activity_main">
 
+    <ImageView
+        android:id="@+id/cloud_download_image"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        app:srcCompat="@drawable/download"
+        android:background="@color/colorPrimaryDark"
+        app:tint="#7A25E3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.6"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/main_layout"
+        app:layout_constraintVertical_bias="0.0"
+         />
+
     <RadioGroup
         android:id="@+id/radioGroup"
         android:layout_width="match_parent"
