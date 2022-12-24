@@ -81,7 +81,7 @@ class MainActivity : AppCompatActivity() {
 
     private val receiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
-            loadingButton.setLoadingButtonState(ButtonState.Completed)
+            loadingButton.setLoadingButtonStatus(ButtonState.Completed)
 //            Log.i("MainActivity", "Receive")
             val id = intent?.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1)
 //            Log.i("MainActivity", "$id")
@@ -118,7 +118,7 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun download() {
-        loadingButton.setLoadingButtonState(ButtonState.Loading)
+        loadingButton.setLoadingButtonStatus(ButtonState.Loading)
         Log.i("MainActivity", "download")
         val request =
             DownloadManager.Request(Uri.parse(URL))

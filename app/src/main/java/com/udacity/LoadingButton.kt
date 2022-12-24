@@ -14,8 +14,8 @@ import kotlin.properties.Delegates
 class LoadingButton @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : View(context, attrs, defStyleAttr) {
-    private var widthSize = 0
-    private var heightSize = 0
+    private var widthSize = 0f
+    private var heightSize = 0f
     private var progress: Float = 0f
     private var buttonBackgroundColor = 0
     private var buttonTextColor = 0
@@ -25,31 +25,30 @@ class LoadingButton @JvmOverloads constructor(
     private var buttonState: ButtonState by Delegates.observable<ButtonState>(ButtonState.Completed) { p, old, new ->
         when(new){
             ButtonState.Clicked -> {
-
+                custom_button.isEnabled = false
             }
             ButtonState.Loading -> {
-                this.downloadButtonStatus = "We are loading"
-                valueAnimator= ValueAnimator.ofFloat(0f, 300f).apply {
-                    addUpdateListener {
+                downloadButtonStatus = "We are loading"
+                valueAnimator= ValueAnimator.ofFloat(0f, 1f).apply { addUpdateListener {
                         progress = animatedValue as Float
                         invalidate()
                     }
-
                     repeatCount = ValueAnimator.INFINITE
-                    duration = 100000
+                    duration = 2000
                     repeatMode = ValueAnimator.REVERSE
                     start()
                 }
                 custom_button.isEnabled = false
             }
             ButtonState.Completed -> {
-                this.progress = 0f
-                this.downloadButtonStatus = "Completed"
+                progress = 0f
+                downloadButtonStatus = "Download"
                 valueAnimator.cancel()
                 invalidate()
-                custom_button.isEnabled = false
+                custom_button.isEnabled = true
             }
         }
+        invalidate()
     }
 
     private val paint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
@@ -71,40 +70,44 @@ class LoadingButton @JvmOverloads constructor(
     }
 
     override fun onSizeChanged(width: Int, height: Int, oldWidth: Int, oldHeight: Int) {
-        widthSize = (width * 2)
-        heightSize = height
+        widthSize = (width.toFloat() * 2)
+        heightSize = height.toFloat()
     }
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
-        paint.color = buttonBackgroundColor
         val loadingButtonWidth = measuredWidth.toFloat()
         val loadingButtonHeight = measuredHeight.toFloat()
-        canvas.drawRect(loadingButtonWidth, loadingButtonHeight, 0f, 0f, paint)
-        paint.color = buttonTextColor
-        canvas?.drawText(downloadButtonStatus, pivotX, pivotY, paint)
 
+        //To assign the paint color to be buttonBackgroundColor.
+        paint.color = buttonBackgroundColor
+        //Draw the rectangle loading button.
+        canvas.drawRect(loadingButtonWidth, loadingButtonHeight, 0f, 0f, paint)
+
+        //Reassign teh paint color to and then draw the (LoadingButton) text.
+        paint.color = buttonTextColor
+        canvas.drawText(downloadButtonStatus, pivotX, pivotY, paint)
+
+        //Check if the (LoadingButton) in the loading state.
         if (buttonState == ButtonState.Loading) {
             paint.color = resources.getColor(R.color.colorPrimaryDark)
-            var progressVal = progress++ * measuredWidth.toFloat()
-            canvas.drawRoundRect(0f, 0f, progressVal, loadingButtonHeight, 10f, 10f, paint)
+            var arcProgress = progress * measuredWidth
+            canvas.drawRect(0f, 0f, arcProgress, loadingButtonHeight,  paint)
 
             paint.color = buttonTextColor
             canvas.drawText(downloadButtonStatus, pivotX, pivotY, paint)
-            val arcDiameter = 100 * 2
-            val arcRectSize = measuredHeight.toFloat() - paddingBottom.toFloat() - arcDiameter
+
+            //Set the diameter of the arc
+            // and then evaluate its size.
+            val arcDiameter = 40f
+            val arcSizeOfRect = measuredHeight.toFloat()  - arcDiameter - (paddingBottom.toFloat()+ paddingTop.toFloat())
 
             paint.color = resources.getColor(R.color.colorAccent)
-            progressVal = progress * 360f
+            arcProgress = progress * 360f
 
-            canvas.drawArc(paddingStart + arcDiameter.toFloat(),
-                paddingTop.toFloat() + arcDiameter,
-                arcRectSize,
-                arcRectSize,
-                0f,
-                progressVal,
-                true,
-                paint)
+            // Translate the canvas to allow us draw on a new specific area.
+            canvas.translate(pivotX + arcSizeOfRect*2, 1f)
+            canvas.drawArc(10f, 10f, arcSizeOfRect, arcSizeOfRect, 0f, arcProgress, true, paint)
         }
     }
 
@@ -116,13 +119,13 @@ class LoadingButton @JvmOverloads constructor(
             heightMeasureSpec,
             0
         )
-        widthSize = w
-        heightSize = h
+        widthSize = w.toFloat()
+        heightSize = h.toFloat()
         setMeasuredDimension(w, h)
     }
 
-    fun setLoadingButtonState(state: ButtonState) {
-        buttonState = state
+    fun setLoadingButtonStatus(status: ButtonState) {
+        buttonState = status
     }
 
 }
