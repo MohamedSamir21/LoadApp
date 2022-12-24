@@ -33,13 +33,14 @@ class MainActivity : AppCompatActivity() {
     private lateinit var action: NotificationCompat.Action
     private lateinit var selectedFile: String
     private lateinit var downloadManager: DownloadManager
-
     private lateinit var radioGroup: RadioGroup
+    private lateinit var loadingButton: LoadingButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
+        loadingButton = findViewById(R.id.custom_button)
         radioGroup = findViewById(R.id.radioGroup)
 
         registerReceiver(receiver, IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE))
@@ -50,6 +51,7 @@ class MainActivity : AppCompatActivity() {
         )
 
         custom_button.setOnClickListener {
+
             val selectedRadioButtonId = radioGroup.checkedRadioButtonId
             when(selectedRadioButtonId){
                 rbGlide.id->{
@@ -79,6 +81,7 @@ class MainActivity : AppCompatActivity() {
 
     private val receiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
+            loadingButton.setLoadingButtonState(ButtonState.Completed)
 //            Log.i("MainActivity", "Receive")
             val id = intent?.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1)
 //            Log.i("MainActivity", "$id")
@@ -115,6 +118,7 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun download() {
+        loadingButton.setLoadingButtonState(ButtonState.Loading)
         Log.i("MainActivity", "download")
         val request =
             DownloadManager.Request(Uri.parse(URL))
