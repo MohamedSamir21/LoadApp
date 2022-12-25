@@ -1,6 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <MotionScene xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <Transition
+        app:constraintSetStart="@id/statusValueStart"
+        app:constraintSetEnd="@id/statusValueEnd"
+        app:duration="1000"
+        app:autoTransition="animateToEnd">
+        <KeyFrameSet>
+            <KeyAttribute
+                app:framePosition="10"
+                app:motionTarget="@id/tvStatusValue"
+                android:rotationY="-360"
+                />
+            <KeyAttribute
+                app:framePosition="0"
+                app:motionTarget="@id/tvDownloadedFileName"
+                android:alpha="0"
+                />
+            <KeyAttribute
+                app:framePosition="30"
+                app:motionTarget="@id/tvDownloadedFileName"
+                android:alpha="1"
+                />
+        </KeyFrameSet>
+    </Transition>
+
+    <ConstraintSet  android:id="@+id/statusValueEnd">
+        <Constraint
+            android:id="@+id/tvStatusValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@+id/tvDownloadedFileName"
+            app:layout_constraintBottom_toBottomOf="@+id/tvStatus"
+            app:layout_constraintBaseline_toBaselineOf="@id/tvStatus"
+            />
+        <Constraint
+            android:id="@+id/tvDownloadedFileName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="72dp"
+            android:layout_marginTop="72dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintStart_toEndOf="@+id/tvFileName"
+            app:layout_constraintBottom_toBottomOf="@+id/tvFileName"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+    </ConstraintSet>
     <ConstraintSet android:id="@+id/statusValueStart">
         <Constraint
             android:id="@+id/tvStatusValue"
@@ -19,32 +66,6 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
     </ConstraintSet>
-    <ConstraintSet  android:id="@+id/statusValueEnd">
-        <Constraint
-            android:id="@+id/tvStatusValue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="@+id/tvDownloadedFileName"
-            app:layout_constraintBottom_toBottomOf="@+id/tvStatus"
-            app:layout_constraintBaseline_toBaselineOf="@id/tvStatus"
-        />
-        <Constraint
-            android:id="@+id/tvDownloadedFileName"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="72dp"
-            android:layout_marginTop="72dp"
-            android:layout_marginEnd="16dp"
-            app:layout_constraintStart_toEndOf="@+id/tvFileName"
-            app:layout_constraintBottom_toBottomOf="@+id/tvFileName"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
-    </ConstraintSet>
-    <Transition
-        app:constraintSetStart="@id/statusValueStart"
-        app:constraintSetEnd="@id/statusValueEnd"
-        app:duration="1000"
-        app:autoTransition="animateToEnd">
-    </Transition>
+
 
 </MotionScene>

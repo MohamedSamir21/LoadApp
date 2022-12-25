@@ -101,7 +101,7 @@ class LoadingButton @JvmOverloads constructor(
             //Set the diameter of the arc
             // and then evaluate its size.
             val arcDiameter = 40f
-            val arcSizeOfRect = measuredHeight.toFloat()  - arcDiameter - (paddingBottom.toFloat()+ paddingTop.toFloat())
+            val arcSizeOfRect = measuredHeight - arcDiameter - (paddingBottom+ paddingTop)
 
             paint.color = resources.getColor(R.color.colorAccent)
             arcProgress = progress * 360f
