@@ -29,6 +29,7 @@ class DetailActivity : AppCompatActivity() {
         okButton.setOnClickListener {
             val intent = Intent(applicationContext, MainActivity::class.java)
             startActivity(intent)
+            finish()
         }
         NotificationManagerCompat.from(this).cancel(NOTIFICATION_ID )
     }

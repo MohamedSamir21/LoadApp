@@ -14,13 +14,14 @@ import kotlin.properties.Delegates
 class LoadingButton @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : View(context, attrs, defStyleAttr) {
-    private var widthSize = 0f
-    private var heightSize = 0f
-    private var progress: Float = 0f
+
     private var buttonBackgroundColor = 0
     private var buttonTextColor = 0
     private var valueAnimator = ValueAnimator()
     private var downloadButtonStatus = "Download"
+    private var widthSize = 0f
+    private var heightSize = 0f
+    private var progress: Float = 0f
 
     private var buttonState: ButtonState by Delegates.observable<ButtonState>(ButtonState.Completed) { p, old, new ->
         when(new){

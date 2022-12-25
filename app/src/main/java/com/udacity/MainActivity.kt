@@ -30,11 +30,12 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var notificationManager: NotificationManager
     private lateinit var pendingIntent: PendingIntent
-    private lateinit var action: NotificationCompat.Action
-    private lateinit var selectedFile: String
     private lateinit var downloadManager: DownloadManager
     private lateinit var radioGroup: RadioGroup
     private lateinit var loadingButton: LoadingButton
+    private lateinit var action: NotificationCompat.Action
+    private lateinit var selectedFile: String
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,6 +43,7 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         loadingButton = findViewById(R.id.custom_button)
         radioGroup = findViewById(R.id.radioGroup)
+
 
         registerReceiver(receiver, IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE))
 
@@ -83,7 +85,7 @@ class MainActivity : AppCompatActivity() {
         override fun onReceive(context: Context, intent: Intent) {
             loadingButton.setLoadingButtonStatus(ButtonState.Completed)
 //            Log.i("MainActivity", "Receive")
-            val id = intent?.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1)
+            val id = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1)
 //            Log.i("MainActivity", "$id")
 //            Log.i("MainActivity", "$downloadID")
 
@@ -162,7 +164,7 @@ class MainActivity : AppCompatActivity() {
     companion object {
         private var URL = ""
         private const val CHANNEL_ID = "channelId"
-        val NOTIFICATION_ID = 0
+        const val NOTIFICATION_ID = 0
         const val FILENAME = "fileName"
         const val STATUS = "status"
     }
