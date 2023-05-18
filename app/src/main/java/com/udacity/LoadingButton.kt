@@ -23,7 +23,7 @@ class LoadingButton @JvmOverloads constructor(
     private var heightSize = 0f
     private var progress: Float = 0f
 
-    private var buttonState: ButtonState by Delegates.observable<ButtonState>(ButtonState.Completed) { p, old, new ->
+    private var buttonState: ButtonState by Delegates.observable<ButtonState>(ButtonState.Completed) { _, _, new ->
         when(new){
             ButtonState.Clicked -> {
                 custom_button.isEnabled = false
@@ -91,7 +91,7 @@ class LoadingButton @JvmOverloads constructor(
 
         //Check if the (LoadingButton) in the loading state.
         if (buttonState == ButtonState.Loading) {
-            paint.color = resources.getColor(R.color.colorPrimaryDark)
+            paint.color = resources.getColor(R.color.colorPrimaryDark, null)
             var arcProgress = progress * measuredWidth
             canvas.drawRect(0f, 0f, arcProgress, loadingButtonHeight,  paint)
 
@@ -103,7 +103,7 @@ class LoadingButton @JvmOverloads constructor(
             val arcDiameter = 40f
             val arcSizeOfRect = measuredHeight - arcDiameter - (paddingBottom+ paddingTop)
 
-            paint.color = resources.getColor(R.color.colorAccent)
+            paint.color = resources.getColor(R.color.colorAccent, null)
             arcProgress = progress * 360f
 
             // Translate the canvas to allow us draw on a new specific area.
@@ -113,8 +113,8 @@ class LoadingButton @JvmOverloads constructor(
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-        val minw: Int = paddingLeft + paddingRight + suggestedMinimumWidth
-        val w: Int = resolveSizeAndState(minw, widthMeasureSpec, 1)
+        val minW: Int = paddingLeft + paddingRight + suggestedMinimumWidth
+        val w: Int = resolveSizeAndState(minW, widthMeasureSpec, 1)
         val h: Int = resolveSizeAndState(
             MeasureSpec.getSize(w),
             heightMeasureSpec,

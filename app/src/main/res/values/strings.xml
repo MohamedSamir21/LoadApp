@@ -21,4 +21,5 @@
 
     <string name="details_notification_channel_id">details_channel</string>
     <string name="download_notification_channel_description">Download details</string>
+    <string name="ok">OK</string>
 </resources>

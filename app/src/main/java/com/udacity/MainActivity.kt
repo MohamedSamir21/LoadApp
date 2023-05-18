@@ -54,8 +54,7 @@ class MainActivity : AppCompatActivity() {
 
         custom_button.setOnClickListener {
 
-            val selectedRadioButtonId = radioGroup.checkedRadioButtonId
-            when(selectedRadioButtonId){
+            when(radioGroup.checkedRadioButtonId){
                 rbGlide.id->{
                     URL = "https://github.com/bumptech/glide/archive/refs/heads/master.zip"
                     selectedFile = getString(R.string.glide_image_loading_library_by_bumptech)

@@ -65,7 +65,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="32dp"
         android:background="@color/colorAccent"
-        android:text="OK"
+        android:text="@string/ok"
         android:textColor="@color/white"
         android:textSize="@dimen/default_text_size"
         app:layout_constraintBottom_toBottomOf="parent"
