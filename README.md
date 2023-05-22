@@ -9,7 +9,7 @@ A notification will be sent once the download is complete. When a user clicks on
 In the detail activity, the status of the download will be displayed and animated via MotionLayout upon opening the activity.
 
 ### Note:
-This project was created based on educational purposes according to [Advanced Android Kotlin Development Nanodgree](https://www.udacity.com/course/android-kotlin-developer-nanodegree--nd940).
+This project was created based on educational purposes according to [Advanced Android Kotlin Development Nanodegree](https://www.udacity.com/course/android-kotlin-developer-nanodegree--nd940).
 <br>
 <hr>
 
